@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t laflash/docker-complex -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true laflash/docker-complex npm run test
+
+after_success:
+  - docker build -t laflash/complex_client ./client
+  - docker build -t laflash/complex_nginx ./nginx
+  - docker build -t laflash/complex_server ./server
+  - docker build -t laflash/complex_worker ./worker
+# log into docker CLI
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
+# push int dockerhub
+  - docker push laflash/complex_client
+  - docker push laflash/complex_nginx
+  - docker push laflash/complex_server
+  - docker push laflash/complex_worker
+
