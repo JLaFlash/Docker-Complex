@@ -21,3 +21,16 @@ after_success:
   - docker push laflash/complex_server
   - docker push laflash/complex_worker
 
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: $AWS_ACCES_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  region: 'us-east-2'
+  app: 'compex-docker'
+  env: 'CompexDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-371604018441'
+  bucket_path: 'compex-docker'
+  on:
+    branch: master
