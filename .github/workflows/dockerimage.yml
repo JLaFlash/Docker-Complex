@@ -25,6 +25,6 @@ jobs:
         uses: HurricanKai/Publish-Docker-Github-Action@master
           with:
             name: laflash/docker-udemy-client
-            username: ${{ secrets.DOCKER_ID }}
-            password: ${{ secrets.DOCKER_PASS }}
+            username: ${{ secrets. DOCKER_USER }}
+            password: ${{ secrets. DOCKER_PASSWORD }}
             dockerfile: ./client/DockerFile
