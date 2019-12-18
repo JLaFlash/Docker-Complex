@@ -3,7 +3,7 @@ FROM node:alpine as builder
 WORKDIR '/app'
 COPY ./client/package.json .
 RUN npm install
-COPY . ./app
+COPY ./client/** .
 RUN npm run build
 #*** /app/build/ <----- all the stuff we care about from the bill process
 
