@@ -1,0 +1,19 @@
+name: nginx Docker Image CI
+
+on: [push]
+
+jobs:
+
+  publish-to-dockerhub:
+    name: Publish to Docker-Hub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: laflash/docker-complex-nginx
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          context: ./nginx
+          tag: '0.1.1'
