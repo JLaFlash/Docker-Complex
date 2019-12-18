@@ -15,8 +15,8 @@ jobs:
     - name: Test in Docker image
       run: docker run -e CI=true laflash/docker-complex npm run test
 
-  publish1:
-    name: Publish Docker
+  publish:
+    name: Publish to Docker-Hub
     needs: [build-test]
     runs-on: ubuntu-latest
     steps:
@@ -28,21 +28,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         context: ./client
-        tag: 0.1.0
+        tag: '0.1.0'
 
-  Publish:
-    name: Publish to docker-hub
-    needs: [build-test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - run: docker build . --file ./client/Dockerfile --tag laflash/docker-complex
-      - name: Dockerize
-        if: success()
-        uses: manusa/actions-publish-docker@master
-        with:
-          name: laflash/docker-complex
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tag: 0.1.0
