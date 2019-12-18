@@ -17,13 +17,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      - name: npm install and test
-        run: |
-          npm install
-          npm test
-        working-directory: ./worker/
-        env:
-          CI: true
+        - name: npm install and test
+          run: |
+            npm install
+            npm test
+          working-directory: ./worker/
+          env:
+            CI: true
 
   build-docker-test:
     name: build and test in docker
