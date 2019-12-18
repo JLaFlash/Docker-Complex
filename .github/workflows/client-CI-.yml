@@ -1,4 +1,4 @@
-name: Client Node CI
+  name: Client Node CI
 
   on: [push]
 
