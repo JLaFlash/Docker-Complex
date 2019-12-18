@@ -27,4 +27,4 @@ jobs:
           name: laflash/docker-udemy-client
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          dockerfile: ./Docker-Complex/client/DockerFile
+          dockerfile: /client/DockerFile
