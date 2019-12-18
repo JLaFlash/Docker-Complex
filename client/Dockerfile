@@ -10,6 +10,6 @@ RUN npm run build
 ##***** RUN Phase II
 FROM nginx
 EXPOSE 3000
-COPY ./nginx/defult.conf /etc/nginx.conf.d/defult.conf
+COPY ./client/nginx/defult.conf /etc/nginx.conf.d/defult.conf
 COPY --from=builder /app/build /usr/share/nginx/html
 
