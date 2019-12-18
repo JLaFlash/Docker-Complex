@@ -20,5 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Build the Docker image
+        run: docker build . --file ./client/Dockerfile.dev --tag laflash/docker-complex
     - name: Test in Docker image
       run: docker run laflash/docker-complex npm run test
