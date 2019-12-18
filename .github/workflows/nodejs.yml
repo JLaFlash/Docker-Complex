@@ -3,7 +3,7 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
+  build-client:
 
     runs-on: ubuntu-latest
 
@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+    - name: npm install and test
       run: |
         npm ci
         npm install
@@ -25,3 +25,26 @@ jobs:
       working-directory: ./client/
       env:
         CI: true
+
+  build-server:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and test
+        run: |
+          npm ci
+          npm install
+          npm test
+        working-directory: ./server/
+        env:
+          CI: true
