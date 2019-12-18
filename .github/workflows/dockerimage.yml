@@ -23,4 +23,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file ./client/Dockerfile.dev --tag laflash/docker-complex
     - name: Test in Docker image
-      run: docker run laflash/docker-complex npm run test
+      run: docker run -e CI=true laflash/docker-complex npm run test
