@@ -24,10 +24,11 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: myDocker/repository
+        name: laflash/docker-complex-client
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         context: ./client
+        tag: 0.1.0
 
   Publish:
     name: Publish to docker-hub
