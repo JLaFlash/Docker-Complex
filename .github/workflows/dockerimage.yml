@@ -4,18 +4,8 @@ on: [push]
 
 jobs:
 
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Build the Docker image
-      run: docker build . --file ./client/Dockerfile.dev --tag laflash/docker-complex
-
-  
-  test:
-    needs: [build]
+  build-test:
+    name: build and test in docker
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +14,17 @@ jobs:
       run: docker build . --file ./client/Dockerfile.dev --tag laflash/docker-complex
     - name: Test in Docker image
       run: docker run -e CI=true laflash/docker-complex npm run test
+
+  Publish:
+    name: Publish to docker-hub
+    needs: [build-test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: HurricanKai/Publish-Docker-Github-Action@master
+          with:
+            name: laflash/docker-udemy-client
+            username: ${{ secrets.DOCKER_ID }}
+            password: ${{ secrets.DOCKER_PASS }}
+            dockerfile: ./client/DockerFile
