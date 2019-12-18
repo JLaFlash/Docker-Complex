@@ -21,4 +21,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Test in Docker image
-        run: docker run -e CI=true laflash/docker-complex npm run test
+      run: docker run laflash/docker-complex npm run test
