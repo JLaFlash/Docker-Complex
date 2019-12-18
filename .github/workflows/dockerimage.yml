@@ -17,8 +17,8 @@ jobs:
 
   publish1:
     name: Publish Docker
-    on: [push]
     needs: [build-test]
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
@@ -27,7 +27,7 @@ jobs:
         name: myDocker/repository
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        context: /client/
+        context: ./client
 
   Publish:
     name: Publish to docker-hub
