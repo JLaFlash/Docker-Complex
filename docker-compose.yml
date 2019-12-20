@@ -15,7 +15,7 @@ services:
     depends_on:
       - postgres
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: DockerfileCD.dev
       context: ./server
     volumes:
     - /app/node_modules
@@ -31,7 +31,7 @@ services:
 
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: DockerfileCD.dev
       context: ./client
     volumes:
       - /app/node_modules
@@ -39,7 +39,7 @@ services:
 
   worker:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: DockerfileCD.dev
       context: ./worker
     volumes:
       - /app/node_modules
